@@ -20,6 +20,7 @@
         android:textSize="24sp"
         android:text="@string/list_item_number_placeholder"
         android:textColor="@android:color/black" />
+    
 
     <TextView
         android:id="@+id/list_item_description"
