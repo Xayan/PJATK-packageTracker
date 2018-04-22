@@ -1,8 +1,10 @@
 package pl.xayan.tracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +35,14 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
         p5.setTrackingNumber("123");
         Package p6 = new Package();
         p6.setTrackingNumber("123");
+        Package p7 = new Package();
+        p6.setTrackingNumber("123");
+        Package p8 = new Package();
+        p6.setTrackingNumber("123");
+        Package p9 = new Package();
+        p6.setTrackingNumber("123");
+        Package p10 = new Package();
+        p6.setTrackingNumber("123");
 
         packageList.add(p1);
         packageList.add(p2);
@@ -40,12 +50,25 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
         packageList.add(p4);
         packageList.add(p5);
         packageList.add(p6);
+        packageList.add(p7);
+        packageList.add(p8);
+        packageList.add(p9);
+        packageList.add(p10);
 
         ListAdapter listAdapter = new ListAdapter(getApplicationContext(), packageList);
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, PackageDetailsActivity.class);
+                intent.putExtra(PackageDetailsActivity.PACKAGE_ID_KEY, position);
+
+                startActivity(intent);
+            }
+        });
     }
 
     public void onAddClick(View view) {
-        Toast.makeText(this, "Add pressed", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Add pressed", Toast.LENGTH_SHORT).show();
     }
 }

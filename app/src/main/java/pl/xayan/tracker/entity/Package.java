@@ -1,5 +1,10 @@
 package pl.xayan.tracker.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Package {
     enum Status {
         STATUS_NEW,
@@ -8,8 +13,10 @@ public class Package {
         STATUS_DELIVERED
     }
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "tracking_number")
     private String trackingNumber;
 
     private Status status;
