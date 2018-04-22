@@ -13,14 +13,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.xayan.tracker.entity.Package;
+import pl.xayan.tracker.db.entity.Parcel;
 
-public class ListAdapter extends ArrayAdapter<Package> implements View.OnClickListener {
+public class ListAdapter extends ArrayAdapter<Parcel> implements View.OnClickListener {
 
     private Context context;
-    private List<Package> packageList = new ArrayList<>();
+    private List<Parcel> packageList = new ArrayList<>();
 
-    public ListAdapter(Context context, List<Package> data) {
+    public ListAdapter(Context context, List<Parcel> data) {
         super(context, -1, data);
 
         this.context = context;

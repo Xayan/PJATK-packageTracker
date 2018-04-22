@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.xayan.tracker.entity.Package;
+import pl.xayan.tracker.db.entity.Parcel;
 
 public class MainActivity extends AppCompatActivity {ListView simpleList;
     @Override
@@ -21,28 +21,28 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
 
         ListView listView = findViewById(R.id.listview);
 
-        List<Package> packageList = new ArrayList<>();
+        List<Parcel> packageList = new ArrayList<>();
 
-        Package p1 = new Package();
+        Parcel p1 = new Parcel();
         p1.setTrackingNumber("123");
-        Package p2 = new Package();
+        Parcel p2 = new Parcel();
         p2.setTrackingNumber("123");
-        Package p3 = new Package();
+        Parcel p3 = new Parcel();
         p3.setTrackingNumber("123");
-        Package p4 = new Package();
+        Parcel p4 = new Parcel();
         p4.setTrackingNumber("123");
-        Package p5 = new Package();
+        Parcel p5 = new Parcel();
         p5.setTrackingNumber("123");
-        Package p6 = new Package();
+        Parcel p6 = new Parcel();
         p6.setTrackingNumber("123");
-        Package p7 = new Package();
-        p6.setTrackingNumber("123");
-        Package p8 = new Package();
-        p6.setTrackingNumber("123");
-        Package p9 = new Package();
-        p6.setTrackingNumber("123");
-        Package p10 = new Package();
-        p6.setTrackingNumber("123");
+        Parcel p7 = new Parcel();
+        p7.setTrackingNumber("123");
+        Parcel p8 = new Parcel();
+        p8.setTrackingNumber("123");
+        Parcel p9 = new Parcel();
+        p9.setTrackingNumber("123");
+        Parcel p10 = new Parcel();
+        p10.setTrackingNumber("123");
 
         packageList.add(p1);
         packageList.add(p2);

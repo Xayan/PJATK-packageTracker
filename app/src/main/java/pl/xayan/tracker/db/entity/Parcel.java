@@ -1,28 +1,30 @@
-package pl.xayan.tracker.entity;
+package pl.xayan.tracker.db.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Relation;
+
+import java.util.List;
 
 @Entity
-public class Package {
-    enum Status {
-        STATUS_NEW,
-        STATUS_IN_TRANSPORT,
-        STATUS_WAITING,
-        STATUS_DELIVERED
-    }
-
+public class Parcel {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private int id;
 
     @ColumnInfo(name = "tracking_number")
     private String trackingNumber;
 
-    private Status status;
+    @ColumnInfo(name = "status_id")
+    private int statusId;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTrackingNumber() {
@@ -33,11 +35,11 @@ public class Package {
         this.trackingNumber = trackingNumber;
     }
 
-    public Status getStatus() {
-        return status;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 }
