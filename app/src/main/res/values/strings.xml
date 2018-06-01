@@ -3,4 +3,15 @@
     <string name="list_item">List item</string>
     <string name="list_item_number_placeholder">123456789</string>
     <string name="list_item_description_placeholder">02/02/18 - Sent from Shezhen</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="menu_refresh">Refresh active</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_refresh_on_startup">Refresh on startup</string>
+    <string name="pref_description_refresh_on_startup">Refresh all active trackings when the app is launched</string>
 </resources>

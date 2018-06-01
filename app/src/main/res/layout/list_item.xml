@@ -6,7 +6,7 @@
     android:padding="10dp"
     android:focusable="false"
     android:focusableInTouchMode="false"
-    tools:context=".MainActivity">
+    tools:context=".activity.main.MainActivity">
 
 
     <ImageView

@@ -1,4 +1,4 @@
-package pl.xayan.tracker;
+package pl.xayan.tracker.activity.main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.xayan.tracker.R;
 import pl.xayan.tracker.db.entity.Parcel;
 
 public class ListAdapter extends ArrayAdapter<Parcel> implements View.OnClickListener {

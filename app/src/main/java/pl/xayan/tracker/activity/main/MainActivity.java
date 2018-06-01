@@ -1,8 +1,10 @@
-package pl.xayan.tracker;
+package pl.xayan.tracker.activity.main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,6 +13,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.xayan.tracker.R;
+import pl.xayan.tracker.activity.settings.SettingsActivity;
+import pl.xayan.tracker.activity.packageDetails.PackageDetailsActivity;
 import pl.xayan.tracker.db.entity.Parcel;
 
 public class MainActivity extends AppCompatActivity {ListView simpleList;
@@ -66,6 +71,31 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(item.getItemId()) {
+            case R.id.menu_refresh:
+
+                return true;
+            case R.id.menu_settings:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onAddClick(View view) {
