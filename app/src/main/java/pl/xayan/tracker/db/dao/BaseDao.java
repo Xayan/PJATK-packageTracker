@@ -6,11 +6,11 @@ import android.arch.persistence.room.Update;
 
 public interface BaseDao<T> {
     @Insert
-    void insert(T... statuses);
+    void insert(T... entities);
 
     @Update
-    void update(T... statuses);
+    void update(T... entities);
 
     @Delete
-    void delete(T... statuses);
+    void delete(T... entities);
 }

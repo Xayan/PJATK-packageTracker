@@ -9,7 +9,7 @@ import pl.xayan.tracker.db.entity.Parcel;
 
 @Dao
 public interface ParcelDao extends BaseDao<Parcel> {
-    @Query("SELECT * FROM Parcel")
+    @Query("SELECT * FROM Parcel ORDER BY id DESC")
     List<Parcel> getAll();
 
     @Query("SELECT * FROM Parcel WHERE id = :id LIMIT 1")

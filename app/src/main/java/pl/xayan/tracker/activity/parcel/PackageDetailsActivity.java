@@ -1,4 +1,4 @@
-package pl.xayan.tracker.activity.packageDetails;
+package pl.xayan.tracker.activity.parcel;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -25,6 +25,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         int packageId = getIntent().getExtras().getInt(PACKAGE_ID_KEY, 0);
         AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
+        System.out.println(packageId);
         PackageDetailsActivityAsyncTask task = new PackageDetailsActivityAsyncTask(this, packageId);
         task.execute();
     }
@@ -59,6 +60,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Parcel parcel) {
             Activity activity = activityWeakReference.get();
+
+            activity.setTitle(parcel.getLabel() + " - " + parcel.getTrackingNumber());
 
             if(parcel == null) {
                 Toast.makeText(activity.getApplicationContext(), "Parcel not found", Toast.LENGTH_LONG).show();

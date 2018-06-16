@@ -30,7 +30,7 @@ public class ListAdapter extends ArrayAdapter<Parcel> implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(getContext(), "Yo", Toast.LENGTH_SHORT).show();
+
     }
 
     @NonNull
@@ -40,7 +40,10 @@ public class ListAdapter extends ArrayAdapter<Parcel> implements View.OnClickLis
         View rowView = inflater.inflate(R.layout.list_item, parent, false);
 
         TextView listItemNumber = rowView.findViewById(R.id.list_item_number);
-//        listItemNumber.setText(packageList.get(position).getTrackingNumber());
+        TextView listItemDescription = rowView.findViewById(R.id.list_item_description);
+
+        listItemNumber.setText(packageList.get(position).getLabel());
+        listItemDescription.setText(packageList.get(position).getTrackingNumber());
 
         return rowView;
     }

@@ -2,7 +2,7 @@
     <string name="app_name">Package tracker</string>
     <string name="list_item">List item</string>
     <string name="list_item_number_placeholder">123456789</string>
-    <string name="list_item_description_placeholder">02/02/18 - Sent from Shezhen</string>
+    <string name="list_item_description_placeholder">Label</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.xayan.tracker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.packageDetails.PackageDetailsActivity"
+            android:name=".activity.parcel.PackageDetailsActivity"
             android:parentActivityName=".activity.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -31,6 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.xayan.tracker.activity.main.MainActivity" />
         </activity>
+        <activity android:name=".activity.parcel.AddPackageActivity"></activity>
     </application>
 
 </manifest>

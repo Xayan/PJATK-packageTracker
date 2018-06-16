@@ -3,9 +3,6 @@ package pl.xayan.tracker.db.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.Relation;
-
-import java.util.List;
 
 @Entity
 public class Parcel {
@@ -16,8 +13,14 @@ public class Parcel {
     @ColumnInfo(name = "tracking_number")
     private String trackingNumber;
 
-    @ColumnInfo(name = "status_id")
-    private int statusId;
+    @ColumnInfo(name = "label")
+    private String label;
+
+    @ColumnInfo(name = "aftership_id")
+    private int aftershipId;
+
+    @ColumnInfo(name = "aftershipSlug")
+    private String aftershipSlug;
 
     public int getId() {
         return id;
@@ -35,11 +38,27 @@ public class Parcel {
         this.trackingNumber = trackingNumber;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public String getLabel() {
+        return label;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public int getAftershipId() {
+        return aftershipId;
+    }
+
+    public void setAftershipId(int aftershipId) {
+        this.aftershipId = aftershipId;
+    }
+
+    public String getAftershipSlug() {
+        return aftershipSlug;
+    }
+
+    public void setAftershipSlug(String aftershipSlug) {
+        this.aftershipSlug = aftershipSlug;
     }
 }

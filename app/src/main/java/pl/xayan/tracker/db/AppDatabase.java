@@ -39,18 +39,20 @@ public abstract class AppDatabase extends RoomDatabase {
             context,
             AppDatabase.class,
             DATABASE_NAME
-        ).addCallback(new Callback() {
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-                Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        getInstance(context).statusDao().insert(Status.getPopulateData());
-                    }
-                });
-            }
-        })
-        .build();
+        )
+            .fallbackToDestructiveMigration()
+            .addCallback(new Callback() {
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
+                    Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            getInstance(context).statusDao().insert(Status.getPopulateData());
+                        }
+                    });
+                }
+            })
+            .build();
     }
 }
