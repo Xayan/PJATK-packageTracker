@@ -25,20 +25,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
         int packageId = getIntent().getExtras().getInt(PACKAGE_ID_KEY, 0);
         AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
-        System.out.println(packageId);
         PackageDetailsActivityAsyncTask task = new PackageDetailsActivityAsyncTask(this, packageId);
         task.execute();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private static class PackageDetailsActivityAsyncTask extends AsyncTask<Void, Void, Parcel> {

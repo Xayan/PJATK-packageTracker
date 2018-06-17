@@ -1,8 +1,10 @@
 package pl.xayan.tracker.activity.main;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,22 +20,39 @@ import java.util.List;
 
 import pl.xayan.tracker.R;
 import pl.xayan.tracker.activity.parcel.AddPackageActivity;
+import pl.xayan.tracker.activity.parcel.EventListAdapter;
+import pl.xayan.tracker.activity.parcel.ParcelEventListFragment;
+import pl.xayan.tracker.activity.parcel.ParcelListFragment;
 import pl.xayan.tracker.activity.settings.SettingsActivity;
 import pl.xayan.tracker.activity.parcel.PackageDetailsActivity;
 import pl.xayan.tracker.db.AppDatabase;
 import pl.xayan.tracker.db.entity.Parcel;
 import pl.xayan.tracker.service.AftershipApiService;
 
-public class MainActivity extends AppCompatActivity {ListView simpleList;
+public class MainActivity extends FragmentActivity implements ParcelListFragment.OnParcelSelectListener {
+    private ParcelListFragment parcelListFragmentOnCreate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_new);
 
-        try {
-            loadPackages();
-        } catch(Exception e) {
-            System.err.println(e.getMessage());
+        if (findViewById(R.id.fragment_container) != null) {
+
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            ParcelListFragment parcelListFragment = new ParcelListFragment();
+            parcelListFragment.setArguments(getIntent().getExtras());
+
+            parcelListFragmentOnCreate = parcelListFragment;
+
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, parcelListFragment).commit();
+        } else {
+            parcelListFragmentOnCreate = (ParcelListFragment)
+                    getFragmentManager().findFragmentById(R.id.headlines_fragment);
         }
     }
 
@@ -41,8 +60,11 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
     protected void onResume() {
         super.onResume();
 
+        ParcelListFragment parcelListFragment = (ParcelListFragment)
+                getFragmentManager().findFragmentById(R.id.headlines_fragment);
+
         try {
-            loadPackages();
+            parcelListFragment.loadPackages();
         } catch(Exception e) {
             System.err.println(e.getMessage());
         }
@@ -75,45 +97,42 @@ public class MainActivity extends AppCompatActivity {ListView simpleList;
         startActivity(addPackageIntent);
     }
 
-    private static class GetPackagesAsyncTask extends AsyncTask<Void, Void, List<Parcel>> {
-        private WeakReference<Activity> activityWeakReference;
-        private AppDatabase appDatabase;
+    public void onParcelSelect(int position) {
+        ParcelEventListFragment parcelEventListFragment = (ParcelEventListFragment)
+                getFragmentManager().findFragmentById(R.id.webviewfragment);
 
-        public GetPackagesAsyncTask(Activity activity) {
-            this.activityWeakReference = new WeakReference<Activity>(activity);
-            this.appDatabase = AppDatabase.getInstance(activityWeakReference.get().getApplicationContext());
-        }
+        if (parcelEventListFragment != null) {
+            Parcel parcel = parcelListFragmentOnCreate.getParcelList().get(position);
 
-        @Override
-        protected List<Parcel> doInBackground(Void... voids) {
-            return this.appDatabase.parcelDao().getAll();
-        }
-    }
+            Bundle bundle = new Bundle();
+            bundle.putInt(ParcelEventListFragment.PACKAGE_ID_KEY, parcel.getId());
+            parcelEventListFragment.setArguments(bundle);
 
-    private void loadPackages() throws Exception {
-        final Activity activity = this;
-
-        GetPackagesAsyncTask task = new GetPackagesAsyncTask(activity);
-
-        final List<Parcel> parcelList = task.execute().get();
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ListView listView = activity.findViewById(R.id.listview);
-
-                ListAdapter listAdapter = new ListAdapter(activity.getApplicationContext(), parcelList);
-                listView.setAdapter(listAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(activity.getApplicationContext(), PackageDetailsActivity.class);
-                        intent.putExtra(PackageDetailsActivity.PACKAGE_ID_KEY, parcelList.get(position).getId());
-
-                        activity.startActivity(intent);
-                    }
-                });
+            try {
+                parcelEventListFragment.loadDetails();
+            } catch(Exception e) {
+                System.err.println(e.getMessage());
             }
-        });
+        } else {
+            ParcelEventListFragment newFragment = new ParcelEventListFragment();
+
+            Parcel parcel = parcelListFragmentOnCreate.getParcelList().get(position);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(ParcelEventListFragment.PACKAGE_ID_KEY, parcel.getId());
+
+            newFragment.setArguments(bundle);
+
+            try {
+                newFragment.loadDetails();
+            } catch(Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }

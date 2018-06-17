@@ -1,31 +1,33 @@
 package pl.xayan.tracker.db.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-@Entity
 public class Event {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+    private String date;
 
-    @ColumnInfo(name = "parcel_id")
-    private int parcel_id;
+    private String message;
 
-    public int getId() {
-        return id;
+    private String location;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public int getParcel_id() {
-        return parcel_id;
+    public String getMessage() {
+        return message;
     }
 
-    public void setParcel_id(int parcel_id) {
-        this.parcel_id = parcel_id;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
