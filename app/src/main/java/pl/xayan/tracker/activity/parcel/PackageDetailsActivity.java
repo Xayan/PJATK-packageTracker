@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -51,7 +50,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
 
             activity.setTitle(parcel.getLabel() + " - " + parcel.getTrackingNumber());
 
-            if(parcel == null) {
+            if (parcel == null) {
                 Toast.makeText(activity.getApplicationContext(), "Parcel not found", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(activity.getApplicationContext(), "Parcel found: " + parcel.getTrackingNumber(), Toast.LENGTH_LONG).show();

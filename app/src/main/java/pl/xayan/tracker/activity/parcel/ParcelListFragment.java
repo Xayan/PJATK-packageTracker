@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 import pl.xayan.tracker.activity.main.ListAdapter;
@@ -20,17 +19,13 @@ public class ParcelListFragment extends android.app.ListFragment {
 
     private List<Parcel> parcelList;
 
-    public interface OnParcelSelectListener {
-        void onParcelSelect(int position);
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         try {
             loadPackages();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -56,6 +51,20 @@ public class ParcelListFragment extends android.app.ListFragment {
         }
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        mCallback.onParcelSelect(position);
+        getListView().setItemChecked(position, true);
+    }
+
+    public List<Parcel> getParcelList() {
+        return parcelList;
+    }
+
+    public interface OnParcelSelectListener {
+        void onParcelSelect(int position);
+    }
+
     private static class GetPackagesAsyncTask extends AsyncTask<Void, Void, List<Parcel>> {
         private WeakReference<Activity> activityWeakReference;
         private AppDatabase appDatabase;
@@ -69,15 +78,5 @@ public class ParcelListFragment extends android.app.ListFragment {
         protected List<Parcel> doInBackground(Void... voids) {
             return this.appDatabase.parcelDao().getAll();
         }
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        mCallback.onParcelSelect(position);
-        getListView().setItemChecked(position, true);
-    }
-
-    public List<Parcel> getParcelList() {
-        return parcelList;
     }
 }

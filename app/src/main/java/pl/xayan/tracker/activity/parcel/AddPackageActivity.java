@@ -3,8 +3,8 @@ package pl.xayan.tracker.activity.parcel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 import pl.xayan.tracker.R;
-import pl.xayan.tracker.activity.main.MainActivity;
 import pl.xayan.tracker.db.AppDatabase;
 import pl.xayan.tracker.db.entity.Parcel;
 import pl.xayan.tracker.service.AftershipApiService;
@@ -38,7 +37,7 @@ public class AddPackageActivity extends AppCompatActivity {
 
         try {
             parcel = task.execute().get();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
 
             Toast.makeText(this, "There was an error, try again", Toast.LENGTH_SHORT).show();
@@ -73,7 +72,7 @@ public class AddPackageActivity extends AppCompatActivity {
             try {
                 Parcel parcel = apiService.addTracking(this.number, this.label);
 
-                if(parcel != null) {
+                if (parcel != null) {
                     appDatabase.parcelDao().insert(parcel);
 
                     Intent intent = new Intent(activity.getApplicationContext(), PackageDetailsActivity.class);
@@ -83,7 +82,7 @@ public class AddPackageActivity extends AppCompatActivity {
                 } else {
                     throw new Exception("Parcel was not added");
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 final String message = "Error: " + e.getMessage() + "(" + e.getClass().getName() + ")";
 
                 activity.runOnUiThread(new Runnable() {

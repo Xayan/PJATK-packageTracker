@@ -1,33 +1,19 @@
 package pl.xayan.tracker.activity.main;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 import pl.xayan.tracker.R;
 import pl.xayan.tracker.activity.parcel.AddPackageActivity;
-import pl.xayan.tracker.activity.parcel.EventListAdapter;
 import pl.xayan.tracker.activity.parcel.ParcelEventListFragment;
 import pl.xayan.tracker.activity.parcel.ParcelListFragment;
 import pl.xayan.tracker.activity.settings.SettingsActivity;
-import pl.xayan.tracker.activity.parcel.PackageDetailsActivity;
-import pl.xayan.tracker.db.AppDatabase;
 import pl.xayan.tracker.db.entity.Parcel;
-import pl.xayan.tracker.service.AftershipApiService;
 
 public class MainActivity extends FragmentActivity implements ParcelListFragment.OnParcelSelectListener {
     private ParcelListFragment parcelListFragmentOnCreate;
@@ -65,7 +51,7 @@ public class MainActivity extends FragmentActivity implements ParcelListFragment
 
         try {
             parcelListFragment.loadPackages();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
@@ -81,7 +67,7 @@ public class MainActivity extends FragmentActivity implements ParcelListFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_settings:
                 Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settingsIntent);
@@ -110,7 +96,7 @@ public class MainActivity extends FragmentActivity implements ParcelListFragment
 
             try {
                 parcelEventListFragment.loadDetails();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
         } else {
@@ -125,7 +111,7 @@ public class MainActivity extends FragmentActivity implements ParcelListFragment
 
             try {
                 newFragment.loadDetails();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
 

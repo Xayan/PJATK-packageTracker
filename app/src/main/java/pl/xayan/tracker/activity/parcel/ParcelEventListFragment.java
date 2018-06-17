@@ -1,25 +1,16 @@
 package pl.xayan.tracker.activity.parcel;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
-import pl.xayan.tracker.R;
-import pl.xayan.tracker.activity.main.ListAdapter;
-import pl.xayan.tracker.db.AppDatabase;
 import pl.xayan.tracker.db.entity.Event;
-import pl.xayan.tracker.db.entity.Parcel;
 import pl.xayan.tracker.service.AftershipApiService;
 
 public class ParcelEventListFragment extends ListFragment {
@@ -29,7 +20,7 @@ public class ParcelEventListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         try {
             loadDetails();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
